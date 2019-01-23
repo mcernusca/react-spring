@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Splash from './components/Splash'
 import DemoGrid from './components/DemoGrid'
 import Demo from './components/Demo'
 import examples from './components/examples-hooks'
@@ -9,18 +10,21 @@ const DEBUG = false
 //const DEBUG = 'scrip'
 
 ReactDOM.render(
-  <DemoGrid fullscreen={!!DEBUG}>
-    {examples
-      .filter(item => (DEBUG ? item.name.includes(DEBUG) : true))
-      .map(data => (
-        <Demo
-          overlayCode={DEBUG === false}
-          fullscreen={!!DEBUG}
-          key={data.name}
-          {...data}
-          import={import('./demos/' + data.name)}
-        />
-      ))}
-  </DemoGrid>,
+  <>
+    <Splash />
+    <DemoGrid fullscreen={!!DEBUG}>
+      {examples
+        .filter(item => (DEBUG ? item.name.includes(DEBUG) : true))
+        .map(data => (
+          <Demo
+            overlayCode={DEBUG === false}
+            fullscreen={!!DEBUG}
+            key={data.name}
+            {...data}
+            import={import('./demos/' + data.name)}
+          />
+        ))}
+    </DemoGrid>
+  </>,
   document.getElementById('root')
 )
